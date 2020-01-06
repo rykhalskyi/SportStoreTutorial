@@ -12,6 +12,8 @@ namespace SportStoreTests
     [TestFixture]
     public class ProductControllerTests
     {
+
+        //TODO: Add and fix tests. page 225-226
         [Test]
         public void Controller_CanPaginate_True()
         {
