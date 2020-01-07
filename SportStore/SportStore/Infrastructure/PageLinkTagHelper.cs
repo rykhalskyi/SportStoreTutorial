@@ -4,10 +4,6 @@ using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using SportStore.Models.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SportStore.Infrastructure
 {
@@ -34,7 +30,7 @@ namespace SportStore.Infrastructure
             var urlHelper = _urlHelperFactory.GetUrlHelper(ViewContext);
             var result = new TagBuilder("div");
 
-            for (int i = 1; i < PageModel.TotalPages; i++)
+            for (int i = 1; i <= PageModel.TotalPages; i++)
             {
                 var tag = new TagBuilder("a");
                 

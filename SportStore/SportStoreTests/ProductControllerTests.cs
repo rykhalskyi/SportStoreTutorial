@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using SportStore.Controllers;
 using SportStore.Models;
+using SportStore.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,10 +34,11 @@ namespace SportStoreTests
             controller.PageSize = 3;
 
             //Act
-            var result = controller.List(2).ViewData.Model as IEnumerable<Product>;
+            var viewModel = controller.List(2).ViewData.Model as ProductListViewModel;
+            var products = viewModel.Products;
 
             //Assert
-            var prodArray = result.ToArray();
+            var prodArray = products.ToArray();
             Assert.True(prodArray.Length == 2);
             Assert.True("p3".Equals(prodArray[0].Name));
             Assert.True("p4".Equals(prodArray[1].Name));
