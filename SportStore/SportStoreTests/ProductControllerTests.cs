@@ -33,7 +33,7 @@ namespace SportStoreTests
             controller.PageSize = 3;
 
             //Act
-            var viewModel = controller.List(2).ViewData.Model as ProductListViewModel;
+            var viewModel = controller.List(null, 2).ViewData.Model as ProductListViewModel;
             var products = viewModel.Products;
 
             //Assert

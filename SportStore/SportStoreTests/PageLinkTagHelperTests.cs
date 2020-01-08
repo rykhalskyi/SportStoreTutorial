@@ -41,13 +41,13 @@ namespace SportStoreTests
             };
 
             var context = new TagHelperContext(
-                new TagHelperAttibutesList(),
+                new TagHelperAttributeList(),
                 new Dictionary<object, object>(),
                 "");
 
             var content = new Mock<TagHelperContent>();
             var output = new TagHelperOutput("div",
-                new TagHelperAttibutesList(),
+                new TagHelperAttributeList(),
                 (cache, encoder) => Task.FromResult(content.Object));
 
             //Act
