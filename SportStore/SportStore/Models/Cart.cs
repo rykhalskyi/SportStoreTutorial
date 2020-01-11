@@ -11,7 +11,7 @@ namespace SportStore.Models
 
         public IEnumerable<CartLine> Lines => _lines;
 
-        public void AddItem(Product product, int quantity)
+        public virtual void AddItem(Product product, int quantity)
         {
             var line = _lines.FirstOrDefault(l => l.Product.ProductId == product.ProductId);
 
@@ -25,14 +25,14 @@ namespace SportStore.Models
             }
         }
 
-        public void RemoveLine(Product product)
+        public virtual void RemoveLine(Product product)
         {
             _lines.RemoveAll(l => l.Product.ProductId == product.ProductId);
         }
 
         public decimal TotalValue => _lines.Sum(l => l.Product.Price * l.Quantity);
         
-        public void Clear()
+        public virtual void Clear()
         {
             _lines.Clear();
         }
