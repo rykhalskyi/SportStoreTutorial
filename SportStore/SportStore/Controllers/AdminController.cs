@@ -20,7 +20,37 @@ namespace SportStore.Controllers
 
         public ViewResult Edit(int ProductId)
         {
-            return View(_repository.Products.FirstOrDefault(p => p.ProductId == ProductId))
+            return View(_repository.Products.FirstOrDefault(p => p.ProductId == ProductId));
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                _repository.SaveProduct(product);
+                TempData["message"] = $"{product.Name} has been saved";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(product);
+            }
+        }
+
+        public ViewResult Create()
+        {
+            return View("Edit", new Product());
+        }
+
+        public IActionResult Delete (int productId)
+        {
+            var deletedProduct = _repository.DeleteProduct(productId);
+            if (deletedProduct != null)
+            {
+                TempData["message"] = $"{deletedProduct.Name} was deleted";
+            }
+            return RedirectToAction("Index");
         }
     }
 }

@@ -10,7 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SportStore.Models;
 using Microsoft.EntityFrameworkCore;
-
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 
 namespace SportStore
 {
@@ -77,6 +78,13 @@ namespace SportStore
                     template: "{controller=Product}/{action=List}/{id?}"
                     );
             });
+
+            //var cultureInfo = new CultureInfo("uk-UA");
+            var cultureInfo = new CultureInfo("en-US");
+            cultureInfo.NumberFormat.CurrencySymbol = "ˆ";
+
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
             SeedData.EnsurePopulated(app);
         }
