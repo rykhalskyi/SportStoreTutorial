@@ -15,8 +15,8 @@ namespace SportStoreTests
         {
             //Arrange 
 
-            var product1 = new Product() { ProductId = 0, Name = "p1" };
-            var product2 = new Product() { ProductId = 1, Name = "p2" };
+            var product1 = new Product() { ProductId = 1, Name = "p1" };
+            var product2 = new Product() { ProductId = 2, Name = "p2" };
 
             var cart = new Cart();
 
