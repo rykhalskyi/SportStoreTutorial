@@ -12,6 +12,7 @@ using SportStore.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Identity;
 
 namespace SportStore
 {
@@ -29,7 +30,14 @@ namespace SportStore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IProductRepository, FakeProductRepository>();
+
             services.AddDbContext<ApplicatioDbContext>(options => options.UseSqlServer(Configuration["Data:SportStoreProducts:ConnectionString"]));
+            services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(Configuration["Data:SportStoreIdentity:ConnectionString"]));
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppIdentityDbContext>()
+                .AddDefaultTokenProviders();
+
             services.AddTransient<IProductRepository, EFProductRepository>();
             services.AddScoped<Cart>(c => SessionCart.GetCart(c));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -50,6 +58,7 @@ namespace SportStore
             app.UseStaticFiles();
             app.UseStatusCodePages();
             app.UseSession();
+            app.UseAuthentication();
 
             app.UseMvc(routes => {
 
@@ -87,6 +96,7 @@ namespace SportStore
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
             SeedData.EnsurePopulated(app);
+            _ = IdentitySeedData.EnsurePopulated(app);
         }
     }
 }
